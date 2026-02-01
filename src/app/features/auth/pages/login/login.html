@@ -1,0 +1,22 @@
+<div class="p-4">
+  <h1>Login</h1>
+  <form (ngSubmit)="handleSubmit()">
+    <div class="form-group">
+      <input
+        class="form-input"
+        type="text"
+        placeholder="Login"
+        [(ngModel)]="form().login"
+        name="login"
+      />
+      <input
+        class="form-input"
+        type="password"
+        placeholder="Hasło"
+        [(ngModel)]="form().password"
+        name="password"
+      />
+      <button type="submit">Login</button>
+    </div>
+  </form>
+</div>

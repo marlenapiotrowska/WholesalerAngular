@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="logo">Majowy Wholesaler</div>
+
+  <div class="links">
+    <a (click)="goHome()">Home</a>
+
+    <ng-container *ngIf="user.isLoggedIn; else loggedOut">
+      <a (click)="logout()">Logout</a>
+      <span>Hello {{ user.name }}!</span>
+    </ng-container>
+
+    <ng-template #loggedOut>
+      <a (click)="goLogin()">Log in</a>
+      <a (click)="goRegister()">Sign in</a>
+    </ng-template>
+  </div>
+</nav>
