@@ -1,1 +1,45 @@
-<p>register works!</p>
+<div class="p-4">
+    <h1>Register your account</h1>
+      <form (ngSubmit)="handleSubmit()">
+         <div class="form-group">
+            <input
+              class="form-input"
+              type="text"
+              placeholder="Name"
+              [(ngModel)]="form().name"
+              name="name"
+            />
+            <input
+              class="form-input"
+              type="text"
+              placeholder="Surname"
+              [(ngModel)]="form().surname"
+              name="surname"
+            />
+            <select
+                class="form-input"
+                [(ngModel)]="form().role"
+                name="role"
+              >
+                <option value="Manager">Manager</option>
+                <option value="Owner">Owner</option>
+                <option value="Employee">Employee</option>
+            </select>
+            <input
+              class="form-input"
+              type="login"
+              placeholder="Login"
+              [(ngModel)]="form().login"
+              name="login"
+            />
+            <input
+              class="form-input"
+              type="password"
+              placeholder="Hasło"
+              [(ngModel)]="form().password"
+              name="password"
+            />
+          </div>
+          <button type="submit">Sign in</button>
+      </form>
+</div>

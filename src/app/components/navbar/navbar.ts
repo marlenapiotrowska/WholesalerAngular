@@ -14,7 +14,6 @@ export class NavbarComponent {
   private userService = inject(UserService);
   private router = inject(Router);
 
-  // getter dla template
   get user() {
     return this.userService.user();
   }
