@@ -2,7 +2,7 @@
   <div class="logo">Majowy Wholesaler</div>
 
   <div class="links">
-    <a (click)="goHome()">Home</a>
+    <a (click)="go('/')">Home</a>
 
     <ng-container *ngIf="user.isLoggedIn; else loggedOut">
       <a (click)="logout()">Logout</a>
@@ -10,8 +10,8 @@
     </ng-container>
 
     <ng-template #loggedOut>
-      <a (click)="goLogin()">Log in</a>
-      <a (click)="goRegister()">Sign in</a>
+      <a (click)="go('/login')">Log in</a>
+      <a (click)="go('/register')">Sign in</a>
     </ng-template>
   </div>
 </nav>

@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, of, throwError, delay } from 'rxjs';
+import { Observable } from 'rxjs';
 
 export interface User {
   name: string;
@@ -8,26 +9,34 @@ export interface User {
   isLoggedIn: boolean;
 }
 
+export interface Employee {
+  id: number;
+  name: string;
+  role: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
+  private apiUrl = 'http://localhost:5050';
+
   user = signal<User>({ name: '', token: '', isLoggedIn: false });
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: { login: string; password: string }): Observable<User> {
-    if (credentials.login === 'admin' && credentials.password === '1234') {
-      return of({
-        name: 'Admin',
-        token: 'fake-jwt-token',
-        isLoggedIn: true
-      }).pipe(delay(500)); // symulacja opóźnienia API
-    } else {
-      return throwError(() => new Error('Nieprawidłowy login lub hasło')).pipe(delay(500));
-    }
+    return this.http.post<User>(`${this.apiUrl}/users/actions/login`, credentials);
+  }
+
+  register(data: { login: string; password: string; name: string }): Observable<User> {
+    return this.http.post<User>(`${this.apiUrl}/users`, data);
+  }
+
+  getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.apiUrl}/employees`);
   }
 
   setUser(userData: User) {
-    this.user.set(userData);
+    this.user.set({...userData, isLoggedIn: true});
   }
 
   logout() {

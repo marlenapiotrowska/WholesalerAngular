@@ -16,20 +16,17 @@ export class LoginComponent {
   private userService = inject(UserService);
   private router = inject(Router);
 
-  // formularz jako signal
   form = signal({ login: '', password: '' });
 
-  // getter dla wygody w template
   get user() {
     return this.userService.user();
   }
 
   async handleSubmit() {
     try {
-      // konwertujemy Observable na Promise
       const res = await lastValueFrom(this.userService.login(this.form()));
       this.userService.setUser(res);
-      this.router.navigate(['/']); // redirect po zalogowaniu
+      this.router.navigate(['/']);
     } catch (error) {
       console.error('Login error:', error);
       alert('Błąd logowania!');
